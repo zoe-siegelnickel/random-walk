@@ -1,0 +1,41 @@
+import random
+from matplotlib import pyplot as plt
+
+
+def random_walk(n):
+    steps = n
+    x, y = 0, 0
+    visited = [(x,y)]
+    i = 0
+    while len(visited) < n:
+        i = i + 1
+        print(i)
+        possible_steps = [(x+1, y), (x, y+1), (x-1, y), (x, y-1)]
+        try:
+            i = 0
+            while i < len(possible_steps):
+                if possible_steps[i] in visited:
+                    del possible_steps[i]
+                else:
+                    i = i+1
+            if possible_steps == []:
+                return visited
+        except:
+            print("Error")
+            return visited 
+        step = random.choice(possible_steps)
+        x = step[0]
+        y = step[1]
+        print(x, y)
+        visited.append(step)
+    return visited
+        
+list1  = random_walk(300)
+list2 = []
+list3 = []
+print(list1)
+for item in list1:
+    list2.append(item[0])
+    list3.append(item[1])
+plt.plot(list2,list3)
+plt.show()
